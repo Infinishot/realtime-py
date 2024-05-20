@@ -81,7 +81,7 @@ class Socket:
                 for channel in self.channels.get(msg.topic, []):
                     for cl in channel.listeners:
                         if cl.event in ["*", msg.event]:
-                            cl.callback(msg.payload)
+                            await cl.callback(msg.payload)
             except websockets.exceptions.ConnectionClosed:
                 if self.auto_reconnect:
                     logging.info(
